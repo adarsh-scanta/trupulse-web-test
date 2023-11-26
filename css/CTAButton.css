@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+#demoButton {
+  background: -webkit-linear-gradient(90deg, #d06283, #82334b);
+  background: -moz-linear-gradient(90deg, #d06283, #82334b);
+  background: -o-linear-gradient(90deg, #d06283, #82334b);
+  background: linear-gradient(90deg, #d06283, #82334b);
+
+  /* background-size: 1px 240px; */
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  width: 120px;
+  height: 40px;
+  color: white;
+  margin: 0 0.5rem;
+}
+#demoButton:hover {
+  /* background-position: 100px; */
+}
+
+#contactButton {
+  /* background-size: 1px 240px; */
+  border-radius: 20px;
+  border: 1px solid #762e3f;
+  cursor: pointer;
+  width: 120px;
+  height: 40px;
+  color: #d06283;
+  margin: 0 0.5rem;
+}
+#contactButton:hover {
+  background: -webkit-linear-gradient(90deg, #d06283, #82334b);
+  background: -moz-linear-gradient(90deg, #d06283, #82334b);
+  background: -o-linear-gradient(90deg, #d06283, #82334b);
+  background: linear-gradient(90deg, #d06283, #82334b);
+  color: white;
+  border: none;
+  /* background-position: 100px; */
+}
