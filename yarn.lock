@@ -4906,7 +4906,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"contentlayer@npm:0.3.4, contentlayer@npm:^0.3.4":
+"contentlayer@npm:^0.3.4":
   version: 0.3.4
   resolution: "contentlayer@npm:0.3.4"
   dependencies:
@@ -7056,6 +7056,15 @@ __metadata:
     property-information: ^6.0.0
     space-separated-tokens: ^2.0.0
   checksum: 928a21576ff7b9a8c945e7940bcbf2d27f770edb4279d4d04b33dc90753e26ca35c1172d626f54afebd377b2afa32331e399feb3eb0f7b91a399dca5927078ae
+  languageName: node
+  linkType: hard
+
+"he@npm:1.2.0":
+  version: 1.2.0
+  resolution: "he@npm:1.2.0"
+  bin:
+    he: bin/he
+  checksum: 3d4d6babccccd79c5c5a3f929a68af33360d6445587d628087f39a965079d84f18ce9c3d3f917ee1e3978916fc833bb8b29377c3b403f919426f91bc6965e7a7
   languageName: node
   linkType: hard
 
@@ -9240,7 +9249,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-contentlayer@npm:0.3.4, next-contentlayer@npm:^0.3.4":
+"next-contentlayer@npm:^0.3.4":
   version: 0.3.4
   resolution: "next-contentlayer@npm:0.3.4"
   dependencies:
@@ -9408,6 +9417,16 @@ __metadata:
   bin:
     node-gyp: bin/node-gyp.js
   checksum: 60a74e66d364903ce02049966303a57f898521d139860ac82744a5fdd9f7b7b3b61f75f284f3bfe6e6add3b8f1871ce305a1d41f775c7482de837b50c792223f
+  languageName: node
+  linkType: hard
+
+"node-html-parser@npm:^6.1.11":
+  version: 6.1.11
+  resolution: "node-html-parser@npm:6.1.11"
+  dependencies:
+    css-select: ^5.1.0
+    he: 1.2.0
+  checksum: 65900e8b664eec99710ca711c7fd1120977cbe8c7798495962ccb6deeda35a32ab49798870743d74b437afc0f1073a678da9e95abe12a5f24467e9560b6a54d3
   languageName: node
   linkType: hard
 
@@ -11667,7 +11686,6 @@ __metadata:
     "@typescript-eslint/parser": ^6.1.0
     autoprefixer: ^10.4.13
     classnames: ^2.3.2
-    contentlayer: 0.3.4
     cross-env: ^7.0.3
     esbuild: 0.18.11
     eslint: ^8.45.0
@@ -11683,8 +11701,8 @@ __metadata:
     lint-staged: ^13.0.0
     moment: ^2.29.4
     next: 14.0.3
-    next-contentlayer: 0.3.4
     next-themes: ^0.2.1
+    node-html-parser: ^6.1.11
     pliny: 0.1.6
     postcss: ^8.4.24
     prettier: ^3.0.0

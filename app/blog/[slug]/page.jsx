@@ -1,51 +1,38 @@
 'use client'
 import Main from './Main'
-import { useState, useEffect } from 'react'
 import { db } from '../../firebase.js'
 import { collection, query, orderBy, onSnapshot, getDocs } from 'firebase/firestore'
 import RecentPosts from '@/components/Blog/RecentPost'
+import { usePathname } from 'next/navigation'
 
-export default function Page({ params }) {
-  const slug = window.location.pathname.split('/').pop()
-  const [posts, setPosts] = useState([])
-  const [currentPost, setCurrentPost] = useState({})
-  useEffect(() => {
-    setCurrentPost(
-      posts.filter((post) =>
-        post?.data?.customURL?.length > 3
-          ? post?.data?.customURL === slug
-          : post?.data?.title
-              ?.toLowerCase()
-              .replace(/[^a-zA-Z ]/g, '')
-              .split(' ')
-              .join('-')
-              .includes(slug)
-      )[0]
-    )
-  }, [posts])
+async function getData() {
+  const postsRef = collection(db, 'posts')
+  const snapshot = await getDocs(postsRef)
 
-  useEffect(() => {
-    const q = query(collection(db, 'posts'))
-    onSnapshot(q, (querySnapshot) => {
-      // const temp
-      setPosts(
-        querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          data: doc.data(),
-        }))
-      )
-    })
-  }, [])
+  const posts = snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
+  const sortedPosts = posts?.sort((a, b) => b.data.created_at.seconds - a.data.created_at.seconds)
 
+  return posts
+}
+export default async function Page({ params }) {
+  const pathname = usePathname()
+  const currentURL = pathname.split('/')[2]
+  const posts = await getData()
+  const sortedPosts = posts?.sort((a, b) => b.data.created_at.seconds - a.data.created_at.seconds)
+  const publishedPost = sortedPosts?.filter((item) => item?.data?.isPublished)
+  const currentPost = posts.filter((post) =>
+    post?.data?.customURL?.length > 3
+      ? post?.data?.customURL === currentURL
+      : post?.data?.title
+          ?.toLowerCase()
+          .replace(/[^a-zA-Z ]/g, '')
+          .split('')
+          .join('-')
+          .includes(currentURL)
+  )[0]
   return (
     <>
-      <Main post={currentPost} posts={posts} />
-      <div className="bg-gradient-to-r from-lrGradiantPink from-10% to-white  to-100%">
-        <div className="mx-auto my-4   max-w-3xl items-center justify-center  py-5  xl:max-w-5xl ">
-          <p className="font-Poppins text-lg  font-semibold text-blackText ">Recent blog posts </p>
-          <RecentPosts posts={posts} />
-        </div>
-      </div>
+      <Main post={currentPost} posts={publishedPost} />
     </>
   )
 }

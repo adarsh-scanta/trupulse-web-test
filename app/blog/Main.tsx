@@ -1,3 +1,4 @@
+'use client'
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
@@ -5,24 +6,36 @@ import { formatDate } from 'pliny/utils/formatDate'
 import NewsletterForm from 'pliny/ui/NewsletterForm'
 import CTAButton from '../../components/CTAButton'
 import '../../css/CTAButton.css'
-import Pagination from './pagination'
+// import Pagination from './pagination'
+import Pagination from '@/components/Pagination'
 import PrimaryBlogCard from '@/components/Blog/PrimaryBlogCard'
 import SecondBlogCard from '@/components/Blog/SecondBlogCard'
 import RecentPosts from '@/components/Blog/RecentPost'
-export default function Home({ posts }) {
-  const currentPage =
-    typeof window !== undefined && window.location.search.includes('page')
-      ? window.location.search.split('=')[1]
-      : '1'
-  const minIndex = (parseInt(currentPage) - 1) * 9
-  const maxIndex = parseInt(currentPage) * 9
+import { useSearchParams } from 'next/navigation'
 
- 
+export const paginate = (items, pageNumber, pageSize) => {
+  const startIndex = (pageNumber - 1) * pageSize
+  return items.slice(startIndex, startIndex + pageSize) // 0, 9
+}
+
+export default function Home({ posts }) {
+  // const currentPage =
+  // typeof window !== undefined && window.location.search.includes('page')
+  //   ? window.location.search.split('=')[1]
+  //   : '1'
+  // const minIndex = (parseInt(currentPage) - 1) * 9
+  // const maxIndex = parseInt(currentPage) * 9
+  const searchParams = useSearchParams()
+  const query = searchParams.get('page') || '1'
+  const currentPage = parseInt(query)
+  const minIndex = (currentPage - 1) * 9
+  const maxIndex = currentPage * 9
+
   return (
     <>
       <div className="mx-auto my-4   max-w-3xl items-center justify-center  py-5  xl:max-w-5xl ">
         <div className="space-y-8 pb-8 pt-24 md:space-y-5">
-          <h1 className="leading-16 flex justify-center text-center font-Poppins text-5xl font-bold tracking-tight text-gray-900 ">
+          <h1 className="leading-16 font-Poppins flex justify-center text-center text-5xl font-bold tracking-tight text-gray-900 ">
             Resources and insights
           </h1>
 
@@ -33,7 +46,7 @@ export default function Home({ posts }) {
 
         <div className="mt-12">
           <p className="font-Poppins text-lg  font-semibold text-blackText ">Recent blog posts </p>
-         
+
           <RecentPosts posts={posts} />
         </div>
         <div className="mt-12">
@@ -66,7 +79,12 @@ export default function Home({ posts }) {
                   </div>
                 ))}
           </div>
-          <Pagination page={parseInt(currentPage)} perPage={9} itemCount={posts.length ?? 0} />
+          <Pagination
+            items={posts.length} // 100
+            currentPage={currentPage} // 1
+            pageSize={9} // 10
+          />
+          {/* <Pagination page={parseInt(currentPage)} perPage={9} itemCount={posts.length ?? 0} /> */}
         </div>
       </div>
     </>

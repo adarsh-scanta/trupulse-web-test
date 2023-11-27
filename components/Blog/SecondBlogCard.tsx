@@ -1,6 +1,7 @@
+'use client'
 import Image from 'next/image'
 import moment from 'moment'
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation'
 const SecondBlogCard = ({ post }) => {
   const router = useRouter()
 
@@ -27,7 +28,7 @@ const SecondBlogCard = ({ post }) => {
 
   return post ? (
     <div
-      className="mb-8 cursor-pointer  grid grid-cols-1 gap-8 md:grid-cols-2"
+      className="mb-8 grid  cursor-pointer grid-cols-1 gap-8 md:grid-cols-2"
       onClick={() => handleClick(post?.data)}
     >
       <div className="">
